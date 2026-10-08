@@ -15,7 +15,7 @@ class BrowserService:
             else:
                 self._browser = webbrowser.get()
         except (webbrowser.Error, OSError) as error:
-            raise RuntimeError(f"Browser could not open {url}: {error}") from error
+            raise RuntimeError(f"Could not initialize browser: {error}") from error
         self._wikipedia_url = (wikipedia_url or "https://ru.wikipedia.org").rstrip("/")
 
     def open_page(self, page_id: int | str) -> bool:
