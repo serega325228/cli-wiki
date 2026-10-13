@@ -17,7 +17,7 @@ class CLI:
                 if choice == "1":
                     self._search_and_open()
                 else:
-                    print("Invalid choice.")
+                    print("Invalid choice.\n")
             except (EOFError, KeyboardInterrupt):
                 print("\nExiting.")
                 return
@@ -33,13 +33,16 @@ class CLI:
             return
 
         try:
+            # start = time.perf_counter()
             results = self._requests.request(query)
+            # end = time.perf_counter()
+            # print(f"Request took {end - start:.2f} seconds.")
         except RequestServiceError as error:
-            print(f"Search failed: {error}")
+            print(f"Search failed: {error}. \n")
             return
 
         if not results:
-            print("No results found.")
+            print("No results found.\n")
             return
 
         print(f"Suggested {len(results)} results:")

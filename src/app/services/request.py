@@ -2,6 +2,8 @@ import json
 
 import httpx
 
+from src.app.services.common import ttl_cache
+
 
 class RequestServiceError(Exception):
     pass
@@ -31,6 +33,7 @@ class RequestService:
         except (json.JSONDecodeError, UnicodeDecodeError) as error:
             raise RequestServiceError("Wikipedia returned invalid JSON") from error
 
+    #@ttl_cache(ttl_seconds=180, maxsize=100)
     def request(self, user_input: str) -> list[tuple[int, str]]:
         if not user_input:
             raise ValueError("User input is required")
